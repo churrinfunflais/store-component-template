@@ -1,0 +1,5 @@
+/.DS_Store
+/.travis.yml
+/.vtexignore
+/.vscode
+node_modules
