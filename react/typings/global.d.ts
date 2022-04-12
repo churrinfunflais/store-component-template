@@ -1,4 +1,11 @@
 export interface MyComponentProps {
   someString: string
-  intl: any
+  awesomeArray: string[]
+  awesomeObjectArray: AwesomeObject[]
+}
+
+export interface AwesomeObject {
+  someString: string
+  someInt: number
+  image: string
 }

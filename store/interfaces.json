@@ -1,5 +1,8 @@
 {
   "my-component": {
-    "component": "Index"
+    "component": "Index",
+    "content" : {
+      "$ref": "app:monstore.my-component#/definitions/myComponentSchema"
+    }
   }
 }

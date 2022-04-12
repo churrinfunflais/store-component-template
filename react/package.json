@@ -9,9 +9,8 @@
     "ramda": "^0.26.1",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
-    "react-intl": "^2.7.2",
-    "react-router-dom": "^5.1.2",
-    "axios": "^0.19.2"
+    "react-intl": "^2.1.0",
+    "react-router-dom": "^5.1.2"
   },
   "devDependencies": {
     "@types/classnames": "^2.2.7",
@@ -26,6 +25,6 @@
     "eslint-config-vtex-react": "^4.1.0",
     "prettier": "^1.18.2",
     "tslint-eslint-rules": "^5.4.0",
-    "typescript": "3.8.3"
+    "typescript": "3.9.7"
   }
 }
