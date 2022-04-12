@@ -1,0 +1,52 @@
+{
+    "definitions": {
+        "myComponentSchema": {
+            "title": "MyComponent Title",
+            "description": "MyComponent description",
+            "type": "object",
+            "properties": {
+                "imageTitle": {
+                    "title": "SomeString Title",
+                    "description": "editor.my-component.someString.description",
+                    "type": "string",
+                    "default": "SomeString default value"
+                },
+                "awesomeStringArray": {
+                    "title": "editor.my-component.awesomeStringArray.title",
+                    "description": "editor.my-component.awesomeStringArray.description",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "default": [
+                            ""
+                        ]
+                    }
+                },
+                "awesomeObjectArray": {
+                    "title": "editor.my-component.awesomeObjectArray.title",
+                    "description": "editor.my-component.awesomeObjectArray.description",
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "someString": {
+                                "type": "string"
+                            },
+                            "someInt": {
+                                "type": "integer"
+                            },
+                            "image": {
+                                "title": "Image",
+                                "$ref": "app:vtex.native-types#/definitions/url",
+                                "default": "",
+                                "widget": {
+                                    "ui:widget": "image-uploader"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

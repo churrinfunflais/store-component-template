@@ -1,9 +1,8 @@
 /* eslint-disable no-console */
-import React, { useState, useEffect } from 'react'
-import { injectIntl } from 'react-intl'
+import React, { useState } from 'react'
+import { useIntl } from 'react-intl'
 import { useCssHandles } from 'vtex.css-handles'
-import { MyComponentProps } from './typings/global'
-import axios from 'axios'
+import { AwesomeObject, MyComponentProps } from './typings/global'
 import { Spinner } from 'vtex.styleguide'
 
 //Declare Handles for the react component to be accesible
@@ -13,32 +12,18 @@ const CSS_HANDLES = [
   'someHandle3',
   'someHandle4',
   'someHandle5',
+  'someHandle6',
+  'someHandle7',
 ] as const
 
 const MyComponent: StorefrontFunctionComponent<MyComponentProps> = ({
   someString,
-  intl,
+  awesomeArray,
+  awesomeObjectArray,
 }) => {
   const handles = useCssHandles(CSS_HANDLES)
-
+  const { formatMessage } = useIntl()
   const [count, setCount] = useState(0)
-  let [orderFormId, setOrderFormId] = useState()
-
-  //Get current Id from Session API
-  useEffect(() => {
-    async function fetchData() {
-      const {
-        data: { id },
-      } = await axios({
-        url: '/api/sessions?items=*',
-        method: 'GET',
-      })
-
-      setOrderFormId(id)
-    }
-
-    fetchData()
-  })
 
   return (
     <div>
@@ -49,14 +34,7 @@ const MyComponent: StorefrontFunctionComponent<MyComponentProps> = ({
 
       {/* International string from messages framework */}
       <div className={`${handles.someHandle2}`}>
-        <p>
-          {intl.formatMessage({ id: 'store/my-component.somelanguageString' })}
-        </p>
-      </div>
-
-      {/* Get orderFormId from hook */}
-      <div className={`${handles.someHandle3}`}>
-        <p>{orderFormId}</p>
+        <p>{formatMessage({ id: 'store/my-component.somelanguageString' })}</p>
       </div>
 
       {/* Use of a ReactHook */}
@@ -71,6 +49,26 @@ const MyComponent: StorefrontFunctionComponent<MyComponentProps> = ({
           <Spinner />
         </p>
       </div>
+
+      {/* Use of a custom array prop */}
+      <div className={`${handles.someHandle6}`}>
+        <ul>
+          {awesomeArray?.map((item: string) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Use of a custom object array prop */}
+      <div className={`${handles.someHandle7}`}>
+        {awesomeObjectArray?.map(({ someString, someInt, image }: AwesomeObject, index) => (
+          <div key={index}>
+            <p>{someString}</p>
+            <p>{someInt}</p>
+            <img src={image} alt={someString} />
+          </div>
+        ))}
+      </div>
     </div>
   )
 }
@@ -79,15 +77,6 @@ const MyComponent: StorefrontFunctionComponent<MyComponentProps> = ({
 MyComponent.schema = {
   title: 'MyComponent Title',
   description: 'MyComponent description',
-  type: 'object',
-  properties: {
-    someString: {
-      title: 'SomeString Title',
-      description: 'editor.my-component.someString.description',
-      type: 'string',
-      default: 'SomeString default value',
-    },
-  },
 }
 
-export default injectIntl(MyComponent)
+export default MyComponent
